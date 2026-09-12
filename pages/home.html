@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owoloot</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS variables for theme */
+        :root {
+            --bg-color: #0b0c10;
+            --surface-color: rgba(31, 40, 51, 0.6);
+            --primary-gradient: linear-gradient(135deg, #66fcf1, #45a29e);
+            --text-main: #c5c6c7;
+            --text-heading: #ffffff;
+            --glass-border: rgba(102, 252, 241, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(69, 162, 158, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(102, 252, 241, 0.15) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-heading);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        p.subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            color: var(--text-main);
+        }
+
+        /* Dynamic button */
+        .primary-btn {
+            background: var(--primary-gradient);
+            color: var(--bg-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 252, 241, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 252, 241, 0.6);
+        }
+
+        .primary-btn:hover::after {
+            left: 100%;
+        }
+
+        /* Floating elements background */
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(102, 252, 241, 0.2);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+
+        /* Individual bubble styling */
+        .circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        
+        /* Interactive feature boxes */
+        .features {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+        
+        .feature-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .feature-box:hover {
+            background: rgba(102, 252, 241, 0.08);
+            border-color: rgba(102, 252, 241, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .feature-box h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .feature-box p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .features {
+                flex-direction: column;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <ul class="circles">
+        <li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <div class="container">
+        <div class="glass-card">
+            <h1>Owoloot</h1>
+            <p class="subtitle">Welcome to your new digital experience. Beautifully designed, blazingly fast, and built for the future.</p>
+            <button class="primary-btn" onclick="handleClick()">Get Started</button>
+            
+            <div class="features">
+                <div class="feature-box">
+                    <h3>Fast</h3>
+                    <p>Powered by Python backend rendering lightning fast modern interfaces.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Fluid</h3>
+                    <p>Interactive animations that respond naturally to your every touch.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Future</h3>
+                    <p>Ready to scale with a rock-solid foundation for any application.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interaction
+        function handleClick() {
+            const btn = document.querySelector('.primary-btn');
+            btn.innerHTML = 'Welcome Aboard! ✨';
+            btn.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Add a subtle flash effect to the card
+            const card = document.querySelector('.glass-card');
+            card.style.boxShadow = '0 8px 45px rgba(102, 252, 241, 0.6)';
+            
+            setTimeout(() => {
+                card.style.boxShadow = '0 8px 32px 0 rgba(0, 0, 0, 0.37)';
+            }, 500);
+        }
+        
+        // Add dynamic mouse hover effect on boxes
+        const boxes = document.querySelectorAll('.feature-box');
+        boxes.forEach(box => {
+            box.addEventListener('mousemove', e => {
+                const rect = box.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                box.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(102, 252, 241, 0.15) 0%, rgba(255, 255, 255, 0.03) 50%)`;
+            });
+            
+            box.addEventListener('mouseleave', () => {
+                box.style.background = 'rgba(255, 255, 255, 0.03)';
+            });
+        });
+    </script>
+</body>
+</html>
