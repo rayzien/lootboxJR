@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owoloot - Discord Accounts & Channels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --surface-color: rgba(31, 40, 51, 0.6);
+            --primary-gradient: linear-gradient(135deg, #0affe4, #ff2d55);
+            --text-main: #c5c6c7;
+            --text-heading: #ffffff;
+            --glass-border: rgba(10, 255, 228, 0.2);
+            --c1: #ff2d55;
+            --c2: #0affe4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body {
+            background-color: var(--bg-color); color: var(--text-main); min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            padding: 3rem 1rem;
+            background-image: radial-gradient(circle at 50% 20%, rgba(10, 255, 228, 0.12) 0%, transparent 70%);
+        }
+        .container { width: 100%; max-width: 950px; z-index: 1; }
+        
+        .header-bar {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
+        }
+        .logo-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff;
+            letter-spacing: 2px;
+        }
+        .logo-title span { color: var(--c2); }
+        .nav-back {
+            color: var(--c2); text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            border: 1px solid rgba(10, 255, 228, 0.3); padding: 8px 18px; border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-back:hover { background: rgba(10, 255, 228, 0.1); border-color: var(--c2); }
+
+        .glass-card {
+            background: var(--surface-color); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border); border-radius: 20px; padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;
+            background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        p.subtitle { color: rgba(255,255,255,0.6); margin-bottom: 1.8rem; font-size: 0.95rem; }
+
+        /* TOKEN FORM */
+        .input-group {
+            display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;
+        }
+        .input-label {
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; text-transform: uppercase;
+            letter-spacing: 1px; color: rgba(255,255,255,0.8);
+        }
+        .input-row { display: flex; gap: 12px; }
+        .modern-input {
+            flex: 1; padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.4); color: #fff; font-size: 0.95rem; font-family: monospace;
+            transition: border-color 0.3s;
+        }
+        .modern-input:focus { outline: none; border-color: var(--c2); }
+
+        .btn-action {
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; color: #000; background: var(--c2); border: none; padding: 12px 24px;
+            border-radius: 10px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;
+        }
+        .btn-action:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 0 15px rgba(10,255,228,0.4); }
+
+        /* LIMIT COUNTER BADGES */
+        .limit-badge {
+            display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff;
+        }
+        .limit-badge.warning { background: rgba(255, 45, 85, 0.2); border-color: var(--c1); color: var(--c1); }
+
+        /* PROFILE CARD */
+        .profile-card {
+            display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem;
+            background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 2rem;
+        }
+        .profile-avatar {
+            width: 48px; height: 48px; border-radius: 50%; background: var(--c1);
+            display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;
+        }
+        .profile-details h3 { font-size: 1.1rem; color: #fff; }
+        .profile-details p { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+        /* SELECTION GRIDS */
+        .section-header-wrap {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .item-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .select-card {
+            background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.25s ease;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .select-card:hover { border-color: rgba(10,255,228,0.4); background: rgba(10,255,228,0.04); }
+        .select-card.selected {
+            border-color: var(--c2); background: rgba(10,255,228,0.12);
+            box-shadow: 0 0 15px rgba(10,255,228,0.15);
+        }
+        .select-card.disabled {
+            opacity: 0.4; cursor: not-allowed; border-color: rgba(255,255,255,0.05);
+        }
+        .select-name { font-weight: 600; font-size: 0.9rem; color: #fff; }
+        .select-check {
+            width: 20px; height: 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3);
+            display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;
+        }
+        .select-card.selected .select-check { background: var(--c2); border-color: var(--c2); color: #000; }
+
+        .alert-box {
+            padding: 12px 16px; border-radius: 10px; font-size: 0.85rem; font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 1rem; display: none;
+        }
+        .alert-box.error { background: rgba(255, 45, 85, 0.15); border: 1px solid var(--c1); color: #ff5f56; }
+        .alert-box.success { background: rgba(10, 255, 228, 0.15); border: 1px solid var(--c2); color: var(--c2); }
+
+        .save-bar {
+            margin-top: 2rem; display: flex; justify-content: flex-end; gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-bar">
+            <div class="logo-title">OWOLOOT <span>ACCOUNTS</span></div>
+            <a href="/" class="nav-back">&larr; BACK TO DASHBOARD</a>
+        </div>
+
+        <div class="glass-card">
+            <h1>Discord Token & Targets</h1>
+            <p class="subtitle">Connect your Discord account to fetch servers and select target channels for OwO commands. Strict limits: Max 2 servers &amp; Max 10 channels.</p>
+
+            <!-- ALERT BOX -->
+            <div class="alert-box" id="alert-box"></div>
+
+            <!-- TOKEN INPUT -->
+            <div class="input-group">
+                <label class="input-label">Discord Account Token</label>
+                <div class="input-row">
+                    <input type="password" id="token-input" class="modern-input" placeholder="Enter Discord Token (e.g. MTAx...)" />
+                    <button class="btn-action" onclick="connectAccount()">◈ CONNECT ACCOUNT</button>
+                </div>
+            </div>
+
+            <!-- PROFILE DISPLAY -->
+            <div class="profile-card" id="profile-card" style="display:none;">
+                <div class="profile-avatar" id="prof-avatar">OWO</div>
+                <div class="profile-details">
+                    <h3 id="prof-name">Account Loading...</h3>
+                    <p id="prof-id">ID: ----------</p>
+                </div>
+            </div>
+
+            <!-- SERVER SELECTION SECTION -->
+            <div class="section-header-wrap">
+                <span class="section-title">◈ Select Target Servers</span>
+                <span class="limit-badge" id="server-badge">0 / 2 Servers Selected</span>
+            </div>
+            <div class="item-grid" id="servers-grid">
+                <p style="color:rgba(255,255,255,0.4); font-size:0.85rem;">Connect a Discord token to fetch servers.</p>
+            </div>
+
+            <!-- CHANNEL SELECTION SECTION -->
+            <div class="section-header-wrap">
+                <span class="section-title">⬡ Select Target Channels</span>
+                <span class="limit-badge" id="channel-badge">0 / 10 Channels Selected</span>
+            </div>
+            <div class="item-grid" id="channels-grid">
+                <p style="color:rgba(255,255,255,0.4); font-size:0.85rem;">Select a server above to fetch text channels.</p>
+            </div>
+
+            <!-- SAVE BUTTON -->
+            <div class="save-bar">
+                <button class="btn-action" onclick="saveConfiguration()" style="background:var(--c1); color:#fff;">
+                    ◈ SAVE TARGET CONFIGURATION
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedServers = [];  // Max 2
+        let selectedChannels = []; // Max 10
+        let loadedGuilds = [];
+        let loadedChannels = {};
+
+        function showAlert(msg, type = 'error') {
+            const box = document.getElementById('alert-box');
+            box.innerText = msg;
+            box.className = 'alert-box ' + type;
+            box.style.display = 'block';
+            setTimeout(() => { box.style.display = 'none'; }, 4000);
+        }
+
+        async function connectAccount() {
+            const token = document.getElementById('token-input').value.trim();
+            if (!token) {
+                showAlert('Please enter a valid Discord token.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/discord/connect', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: token })
+                });
+
+                const data = await response.json();
+                if (!data.success) {
+                    showAlert(data.error || 'Failed to connect Discord account.', 'error');
+                    return;
+                }
+
+                // Show profile
+                document.getElementById('profile-card').style.display = 'flex';
+                document.getElementById('prof-name').innerText = data.user.username + '#' + (data.user.discriminator || '0000');
+                document.getElementById('prof-id').innerText = 'ID: ' + data.user.id;
+                document.getElementById('prof-avatar').innerText = (data.user.username || 'OWO').substring(0, 2).toUpperCase();
+
+                loadedGuilds = data.guilds || [];
+                renderServersGrid();
+                showAlert('Discord token connected successfully.', 'success');
+            } catch (err) {
+                showAlert('Error connecting to backend API.', 'error');
+            }
+        }
+
+        function renderServersGrid() {
+            const grid = document.getElementById('servers-grid');
+            grid.innerHTML = '';
+
+            if (loadedGuilds.length === 0) {
+                grid.innerHTML = '<p style="color:rgba(255,255,255,0.4); font-size:0.85rem;">No servers found for this token.</p>';
+                return;
+            }
+
+            loadedGuilds.forEach(g => {
+                const isSel = selectedServers.includes(g.id);
+                const card = document.createElement('div');
+                card.className = 'select-card' + (isSel ? ' selected' : '');
+                card.innerHTML = `
+                    <span class="select-name">◈ ${g.name}</span>
+                    <div class="select-check">${isSel ? '◈' : ''}</div>
+                `;
+                card.onclick = () => toggleServer(g.id, g.name);
+                grid.appendChild(card);
+            });
+
+            updateBadges();
+        }
+
+        async function toggleServer(guildId, guildName) {
+            const idx = selectedServers.indexOf(guildId);
+            if (idx >= 0) {
+                selectedServers.splice(idx, 1);
+            } else {
+                // ENFORCE MAX 2 SERVERS
+                if (selectedServers.length >= 2) {
+                    showAlert('[LIMIT EXCEEDED] Maximum 2 servers allowed.', 'error');
+                    return;
+                }
+                selectedServers.push(guildId);
+                // Fetch channels for this guild
+                await fetchGuildChannels(guildId);
+            }
+
+            renderServersGrid();
+            renderChannelsGrid();
+        }
+
+        async function fetchGuildChannels(guildId) {
+            try {
+                const res = await fetch(`/api/discord/guilds/${guildId}/channels`);
+                const data = await res.json();
+                loadedChannels[guildId] = data.channels || [];
+            } catch (err) {
+                console.error('Failed fetching channels for guild:', guildId);
+            }
+        }
+
+        function renderChannelsGrid() {
+            const grid = document.getElementById('channels-grid');
+            grid.innerHTML = '';
+
+            if (selectedServers.length === 0) {
+                grid.innerHTML = '<p style="color:rgba(255,255,255,0.4); font-size:0.85rem;">Select at least 1 server above to view channels.</p>';
+                return;
+            }
+
+            let totalChannelsRendered = 0;
+
+            selectedServers.forEach(gId => {
+                const chs = loadedChannels[gId] || [];
+                chs.forEach(ch => {
+                    totalChannelsRendered++;
+                    const isSel = selectedChannels.includes(ch.id);
+                    const card = document.createElement('div');
+                    card.className = 'select-card' + (isSel ? ' selected' : '');
+                    card.innerHTML = `
+                        <span class="select-name"># ${ch.name}</span>
+                        <div class="select-check">${isSel ? '◈' : ''}</div>
+                    `;
+                    card.onclick = () => toggleChannel(ch.id);
+                    grid.appendChild(card);
+                });
+            });
+
+            if (totalChannelsRendered === 0) {
+                grid.innerHTML = '<p style="color:rgba(255,255,255,0.4); font-size:0.85rem;">Loading channels for selected servers...</p>';
+            }
+
+            updateBadges();
+        }
+
+        function toggleChannel(chId) {
+            const idx = selectedChannels.indexOf(chId);
+            if (idx >= 0) {
+                selectedChannels.splice(idx, 1);
+            } else {
+                // ENFORCE MAX 10 CHANNELS
+                if (selectedChannels.length >= 10) {
+                    showAlert('[LIMIT EXCEEDED] Maximum 10 channels allowed.', 'error');
+                    return;
+                }
+                selectedChannels.push(chId);
+            }
+
+            renderChannelsGrid();
+        }
+
+        function updateBadges() {
+            const sBadge = document.getElementById('server-badge');
+            sBadge.innerText = `${selectedServers.length} / 2 Servers Selected`;
+            sBadge.className = 'limit-badge' + (selectedServers.length >= 2 ? ' warning' : '');
+
+            const cBadge = document.getElementById('channel-badge');
+            cBadge.innerText = `${selectedChannels.length} / 10 Channels Selected`;
+            cBadge.className = 'limit-badge' + (selectedChannels.length >= 10 ? ' warning' : '');
+        }
+
+        async function saveConfiguration() {
+            if (selectedServers.length > 2) {
+                showAlert('Cannot save: Maximum 2 servers allowed.', 'error');
+                return;
+            }
+            if (selectedChannels.length > 10) {
+                showAlert('Cannot save: Maximum 10 channels allowed.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/discord/config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        selected_servers: selectedServers,
+                        selected_channels: selectedChannels
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showAlert('Target configuration saved! (Max 2 Servers, Max 10 Channels enforced)', 'success');
+                } else {
+                    showAlert(data.error || 'Failed to save configuration.', 'error');
+                }
+            } catch (err) {
+                showAlert('Error saving configuration.', 'error');
+            }
+        }
+
+        // On load: fetch current config
+        async function loadExistingConfig() {
+            try {
+                const res = await fetch('/api/discord/config');
+                const data = await res.json();
+                if (data.discord_token) {
+                    document.getElementById('token-input').value = data.discord_token;
+                    selectedServers = data.selected_servers || [];
+                    selectedChannels = data.selected_channels || [];
+                    await connectAccount();
+                }
+            } catch (err) {}
+        }
+        loadExistingConfig();
+    </script>
+</body>
+</html>
