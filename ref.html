@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owoloot — New Era</title>
+    <title>XTREME — New Era</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link
+    <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,900;1,400&family=Space+Grotesk:wght@300;400;700&family=Orbitron:wght@900&family=Abril+Fatface&family=Righteous&family=Permanent+Marker&family=Black+Han+Sans&family=Cinzel+Decorative:wght@900&family=Monoton&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/ansi_up@5.1.0/ansi_up.min.js"></script>
     <style>
         /* ─── RESET ─── */
         *,
@@ -1156,254 +1155,14 @@
             opacity: .25;
             transition: background 2s ease;
         }
-
-        /* ─── HERO BALANCE & STATUS STYLING ─── */
-        .big-balance-num {
-            font-size: clamp(48px, 11vw, 160px);
-            font-weight: 900;
-            font-family: var(--font-display);
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff 0%, var(--c1) 50%, var(--c2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            line-height: 0.9;
-            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
-        }
-
-        .hero-status-bar {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            animation: fadeSlideUp .7s .6s both;
-        }
-
-        /* ─── TERMINAL & STATUS ─── */
-        .status-container {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            text-align: left;
-            backdrop-filter: blur(12px);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .status-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .status-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .status-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        /* ─── 3 STATUS STATES ─── */
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            transition: all 0.4s ease;
-        }
-
-        /* State 1: Running */
-        .status-indicator.state-running {
-            background: rgba(39, 201, 63, 0.15);
-            color: #27c93f;
-            border: 1px solid rgba(39, 201, 63, 0.5);
-            box-shadow: 0 0 20px rgba(39, 201, 63, 0.25);
-        }
-        .status-indicator.state-running .pulse {
-            width: 10px;
-            height: 10px;
-            background: #27c93f;
-            border-radius: 50%;
-            animation: pulse-green 1.5s infinite;
-        }
-
-        /* State 2: Hanged Up */
-        .status-indicator.state-hanged-up {
-            background: rgba(255, 189, 46, 0.15);
-            color: #ffbd2e;
-            border: 1px solid rgba(255, 189, 46, 0.5);
-            box-shadow: 0 0 20px rgba(255, 189, 46, 0.25);
-        }
-        .status-indicator.state-hanged-up .pulse {
-            width: 10px;
-            height: 10px;
-            background: #ffbd2e;
-            border-radius: 50%;
-            animation: pulse-yellow 2s infinite;
-        }
-
-        /* State 3: Captcha Detected */
-        .status-indicator.state-captcha {
-            background: rgba(255, 95, 86, 0.25);
-            color: #ff5f56;
-            border: 1px solid rgba(255, 95, 86, 0.8);
-            box-shadow: 0 0 25px rgba(255, 95, 86, 0.45);
-            animation: captchaContainerAlert 1s infinite alternate;
-        }
-        .status-indicator.state-captcha .pulse {
-            width: 12px;
-            height: 12px;
-            background: #ff5f56;
-            border-radius: 50%;
-            animation: pulse-red-flash 0.6s infinite alternate;
-        }
-
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39, 201, 63, 0.7); }
-            70% { transform: scale(1.15); box-shadow: 0 0 0 10px rgba(39, 201, 63, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(39, 201, 63, 0); }
-        }
-
-        @keyframes pulse-yellow {
-            0% { transform: scale(0.95); opacity: 0.7; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.7; }
-        }
-
-        @keyframes pulse-red-flash {
-            0% { transform: scale(0.8); opacity: 0.3; }
-            100% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #ff5f56; }
-        }
-
-        @keyframes captchaContainerAlert {
-            0% { border-color: rgba(255, 95, 86, 0.6); box-shadow: 0 0 15px rgba(255, 95, 86, 0.3); }
-            100% { border-color: rgba(255, 95, 86, 1); box-shadow: 0 0 35px rgba(255, 95, 86, 0.8); }
-        }
-
-        /* STATE TESTER BUTTONS */
-        .state-tester-box {
-            margin-top: 1.5rem;
-            padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-            justify-content: space-between;
-        }
-        .tester-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.7);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .tester-btn-group {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .tester-btn {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(0,0,0,0.5);
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .tester-btn:hover {
-            transform: translateY(-2px);
-        }
-        .tester-btn.btn-state-running:hover {
-            border-color: #27c93f; background: rgba(39,201,63,0.2); color: #27c93f;
-        }
-        .tester-btn.btn-state-hanged-up:hover {
-            border-color: #ffbd2e; background: rgba(255,189,46,0.2); color: #ffbd2e;
-        }
-        .tester-btn.btn-state-captcha:hover {
-            border-color: #ff5f56; background: rgba(255,95,86,0.2); color: #ff5f56;
-        }
-        
-        .terminal-container {
-            margin-top: 2rem;
-            background: #050505;
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: left;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            width: 100%;
-        }
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 0.5rem;
-        }
-        .terminal-header .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .dot.red { background: #ff5f56; }
-        .dot.yellow { background: #ffbd2e; }
-        .dot.green { background: #27c93f; }
-        .terminal-header span {
-            margin-left: 10px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
-            font-family: monospace;
-        }
-        #terminal-output {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            height: 350px;
-            overflow-y: auto;
-            color: #ddd;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        #terminal-output::-webkit-scrollbar {
-            width: 8px;
-        }
-        #terminal-output::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-        }
     </style>
-
 </head>
 
 <body>
 
     <!-- PAGE LOADER -->
     <div id="loader">
-        <div class="loader-logo">OWOLOOT</div>
+        <div class="loader-logo">XTREME</div>
         <div class="loader-bar-wrap">
             <div class="loader-bar"></div>
         </div>
@@ -1422,18 +1181,18 @@
     <div class="vignette"></div>
 
     <!-- XTREME WATERMARK -->
-    <div id="wm">OWOLOOT</div>
+    <div id="wm">XTREME</div>
 
     <!-- NOTIFICATION TOAST -->
     <div id="notif-toast">
         <button class="notif-close" onclick="closeToast()">&times;</button>
-        <div class="notif-title" id="nt-title">OWOLOOT</div>
+        <div class="notif-title" id="nt-title">XTREME</div>
         <div class="notif-body" id="nt-body">Welcome to the new era.</div>
     </div>
 
     <!-- NAV -->
     <nav id="navbar">
-        <a href="#" class="logo">OWOLOOT</a>
+        <a href="#" class="logo">XTREME</a>
         <ul class="nav-links">
             <li><a href="#work" data-symbol="◈">Work</a></li>
             <li><a href="#about" data-symbol="◉">About</a></li>
@@ -1483,23 +1242,12 @@
 
     <!-- ═══ HERO ═══ -->
     <section id="hero">
-        <p class="hero-eyebrow">◈ OWOLOOT BOT — LIVE BALANCE & STATUS ◈</p>
-        <div class="hero-balance-wrap">
-            <h1 class="hero-h1" id="hero-h1">
-                <span id="hero-balance-num" class="big-balance-num">1,250,450</span><br>
-                <em>OWO COINS</em>
-            </h1>
-        </div>
-        <div class="hero-status-bar">
-            <div class="status-indicator state-running" id="hero-status-indicator">
-                <div class="pulse"></div>
-                <span id="hero-status-text">RUNNING</span>
-            </div>
-        </div>
-        <p class="hero-sub">Automated OwO loot harvester with real-time balance tracking, status monitoring, and automatic captcha detection alert system.</p>
+        <p class="hero-eyebrow">◈ New Era Collection — 2025</p>
+        <h1 class="hero-h1" id="hero-h1">NEW<br><em>ERA</em></h1>
+        <p class="hero-sub">Beyond boundaries. Beyond limits. A visual language for those who refuse to be ordinary.</p>
         <div class="hero-cta">
-            <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"><span>◈ System Controls</span></button>
-            <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Logs →</button>
+            <button class="btn-primary"><span>◈ Explore Work</span></button>
+            <button class="btn-ghost">Watch Reel</button>
         </div>
     </section>
 
@@ -1513,7 +1261,7 @@
     <!-- ═══ FRAME-BY-FRAME ANIMATION ═══ -->
     <div class="fbf-stage" id="fbf">
         <div class="fbf-canvas" id="fbfCanvas">
-            <div class="fbf-text">OWOLOOT</div>
+            <div class="fbf-text">XTREME</div>
             <div class="fbf-frame f1 visible">
                 <div class="shape"></div>
             </div>
@@ -1574,43 +1322,26 @@
         </div>
     </section>
 
-    <!-- ═══ TERMINAL LOGS & STATUS ═══ -->
-    <section id="services" style="background:rgba(10,255,228,.03)">
-        <p class="section-label">◉ System Status & Controls</p>
-        <h2 class="section-h2">Bot<br><em>Status</em><br>& Feed</h2>
-        
-        <div class="status-container">
-            <div class="status-info">
-                <span class="status-label">Discord Account</span>
-                <span class="status-value" id="account-value">Loading...</span>
+    <!-- ═══ SERVICES ═══ -->
+    <section id="services" style="background:rgba(255,45,85,.03)">
+        <p class="section-label">◉ Services</p>
+        <h2 class="section-h2"><em>What</em> We<br>Create</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-num">I</div>
+                <h3>⬡ UI / UX Design</h3>
+                <p>Interfaces that feel inevitable. Products people don't want to put down.</p>
             </div>
-            <div class="status-info">
-                <span class="status-label">OwO Coins Balance</span>
-                <span class="status-value" id="status-coins-value">1,250,450</span>
+            <div class="card">
+                <div class="card-num">II</div>
+                <h3>◈ Art Direction</h3>
+                <p>A single visual voice across every touchpoint of your brand.</p>
             </div>
-            <div class="status-indicator state-running" id="status-indicator">
-                <div class="pulse"></div>
-                <span id="status-text">RUNNING</span>
+            <div class="card">
+                <div class="card-num">III</div>
+                <h3>◎ Development</h3>
+                <p>Production-grade code. Lightning fast. Pixel perfect. Always.</p>
             </div>
-        </div>
-
-        <div class="state-tester-box">
-            <span class="tester-label">Simulate / Toggle Status State:</span>
-            <div class="tester-btn-group">
-                <button class="tester-btn btn-state-running" onclick="updateBotState('running')">◈ RUNNING</button>
-                <button class="tester-btn btn-state-hanged-up" onclick="updateBotState('hanged_up')">▲ HANGED UP</button>
-                <button class="tester-btn btn-state-captcha" onclick="updateBotState('captcha_detected')">⬡ CAPTCHA DETECTED</button>
-            </div>
-        </div>
-        
-        <div class="terminal-container">
-            <div class="terminal-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-                <span>python terminal -- logs</span>
-            </div>
-            <div id="terminal-output"></div>
         </div>
     </section>
 
@@ -1637,7 +1368,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-top">
-            <div class="footer-logo">OWOLOOT</div>
+            <div class="footer-logo">XTREME</div>
             <ul class="footer-links">
                 <li><a href="#">◈ Instagram</a></li>
                 <li><a href="#">⬡ Twitter</a></li>
@@ -1646,20 +1377,34 @@
             </ul>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copy">© 2025 OWOLOOT STUDIO — ALL RIGHTS RESERVED</p>
+            <p class="footer-copy">© 2025 XTREME STUDIO — ALL RIGHTS RESERVED</p>
             <p class="footer-copy" id="bgCredit">Background: Artwork Collection</p>
         </div>
     </footer>
 
     <script>
         /* ══ CONFIG ══ */
-                const BG_IMAGES = [
-            'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1600&q=80',
-            'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1600&q=80',
-            'https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?w=1600&q=80',
-            'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80',
-            'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1600&q=80',
-            'https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=1600&q=80'
+        const BG_IMAGES = [
+            'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600',
+            'https://images.unsplash.com/photo-1579547944212-c4f4961a8dd8?w=1600',
+            'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600',
+            'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600',
+            'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1600',
+            'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=1600',
+            'https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1600',
+            'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1600',
+            'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600',
+            'https://images.unsplash.com/photo-1502481851512-e9e2529bfbf9?w=1600',
+            'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600',
+            'https://images.unsplash.com/photo-1490682143684-14369e18dce8?w=1600',
+            'https://images.unsplash.com/photo-1511300636408-a63a89df3482?w=1600',
+            'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1600',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600',
+            'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1600',
+            'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600',
+            'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?w=1600',
+            'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600',
+            'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1600'
         ];
 
         const WM_FONTS = [
@@ -1848,7 +1593,7 @@
 
         async function requestNotif() {
             if (!('Notification' in window)) {
-                showToast('◈ OWOLOOT', 'Notifications not supported in this browser.');
+                showToast('◈ XTREME', 'Notifications not supported in this browser.');
                 return;
             }
             if (Notification.permission === 'granted') {
@@ -1859,7 +1604,7 @@
                 notifGranted = true;
                 sendBrowserNotif();
             } else {
-                showToast('◈ OWOLOOT', 'Enable notifications in browser settings.');
+                showToast('◈ XTREME', 'Enable notifications in browser settings.');
             }
         }
 
@@ -1875,7 +1620,7 @@
 
         // Auto-show welcome toast after load
         window.addEventListener('load', () => {
-            setTimeout(() => showToast('◈ OWOLOOT — New Era', 'Welcome. Every refresh is a new world.'), 2500);
+            setTimeout(() => showToast('◈ XTREME — New Era', 'Welcome. Every refresh is a new world.'), 2500);
             // Auto-cycle notifications every 30s if granted
             setInterval(() => {
                 if (Notification.permission === 'granted') sendBrowserNotif();
@@ -1884,104 +1629,6 @@
 
         // Check on load
         if (Notification.permission === 'granted') notifGranted = true;
-
-        // --- OWOLOOT BACKEND LOGIC ---
-        const ansi_up = new AnsiUp();
-        const terminalOutput = document.getElementById('terminal-output');
-        
-        async function fetchStatus() {
-            try {
-                const response = await fetch('/api/status');
-                const data = await response.json();
-                
-                // Update Discord Account
-                if (document.getElementById('account-value')) {
-                    document.getElementById('account-value').innerText = data.account;
-                }
-                
-                // Update OwO Coins Balance (Big Display & Status Card)
-                const formattedCoins = data.coins_formatted || Number(data.owo_balance || 0).toLocaleString();
-                if (document.getElementById('hero-balance-num')) {
-                    document.getElementById('hero-balance-num').innerText = formattedCoins;
-                }
-                if (document.getElementById('status-coins-value')) {
-                    document.getElementById('status-coins-value').innerText = formattedCoins;
-                }
-                
-                // Update 3 Status States
-                const heroIndicator = document.getElementById('hero-status-indicator');
-                const heroText = document.getElementById('hero-status-text');
-                const indicator = document.getElementById('status-indicator');
-                const text = document.getElementById('status-text');
-                
-                const statusStr = (data.status || 'running').toLowerCase();
-                
-                let stateClass = 'state-running';
-                let stateLabel = '◈ RUNNING';
-                
-                if (statusStr === 'hanged_up' || statusStr === 'hanged up' || statusStr === 'paused') {
-                    stateClass = 'state-hanged-up';
-                    stateLabel = '▲ HANGED UP';
-                } else if (statusStr === 'captcha_detected' || statusStr === 'captcha' || statusStr === 'captcha detected') {
-                    stateClass = 'state-captcha';
-                    stateLabel = '⬡ CAPTCHA DETECTED';
-                } else {
-                    stateClass = 'state-running';
-                    stateLabel = '◈ RUNNING';
-                }
-                
-                [heroIndicator, indicator].forEach(el => {
-                    if (el) {
-                        el.className = 'status-indicator ' + stateClass;
-                    }
-                });
-                
-                if (heroText) heroText.innerText = stateLabel;
-                if (text) text.innerText = stateLabel;
-                
-            } catch (error) {
-                if (document.getElementById('account-value')) document.getElementById('account-value').innerText = 'Offline';
-                if (document.getElementById('status-text')) document.getElementById('status-text').innerText = 'DISCONNECTED';
-                if (document.getElementById('status-indicator')) document.getElementById('status-indicator').className = 'status-indicator state-hanged-up';
-            }
-        }
-
-        async function updateBotState(newStatus) {
-            try {
-                await fetch('/api/status', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ status: newStatus })
-                });
-                await fetchStatus();
-            } catch (err) {
-                console.error("Failed to update status state:", err);
-            }
-        }
-        
-        fetchStatus();
-        setInterval(fetchStatus, 3000);
-        
-        function connectWebSocket() {
-            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsUrl = `${protocol}//${window.location.host}/ws/logs`;
-            const ws = new WebSocket(wsUrl);
-            
-            ws.onmessage = function(event) {
-                const msg = event.data;
-                const html = ansi_up.ansi_to_html(msg);
-                if(terminalOutput) {
-                    terminalOutput.innerHTML += html + '<br>';
-                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-                }
-            };
-            
-            ws.onclose = function(e) {
-                setTimeout(connectWebSocket, 2000);
-            };
-        }
-        connectWebSocket();
-        // -----------------------------
     </script>
 </body>
 

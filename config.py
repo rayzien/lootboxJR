@@ -10,6 +10,9 @@ class Config:
     HOST = os.getenv("HOST", "127.0.0.1")
     PORT = int(os.getenv("PORT", 8000))
     
+    # Discord token for Discum (replace with your actual token in environment variables)
+    DISCORD_TOKEN = os.getenv("DISCORD_TOKEN", "YOUR_DISCORD_TOKEN_HERE")
+    
     # Add other global configuration variables here
     API_VERSION = "v1"
 

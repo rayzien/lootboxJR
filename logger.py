@@ -1,5 +1,26 @@
 import logging
 import sys
+import asyncio
+from collections import deque
+
+log_history = deque(maxlen=200)
+log_subscribers = []
+
+class MemoryLogHandler(logging.Handler):
+    def emit(self, record):
+        try:
+            msg = self.format(record)
+            log_history.append(msg)
+            for sub in log_subscribers:
+                try:
+                    loop = asyncio.get_running_loop()
+                    loop.call_soon_threadsafe(sub.put_nowait, msg)
+                except RuntimeError:
+                    # If called from a thread without an event loop
+                    pass
+        except Exception:
+            self.handleError(record)
+
 
 class ColorfulFormatter(logging.Formatter):
     """Custom logging formatter for colorful output."""
@@ -40,7 +61,11 @@ def get_logger(name: str = "owoloot") -> logging.Logger:
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setFormatter(formatter)
         
+        memory_handler = MemoryLogHandler()
+        memory_handler.setFormatter(formatter)
+        
         logger.addHandler(console_handler)
+        logger.addHandler(memory_handler)
         
     return logger
 
